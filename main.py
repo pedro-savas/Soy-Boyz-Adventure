@@ -2,6 +2,7 @@ import pygame
 import sys
 import math
 import random
+import asyncio
 
 pygame.init()
 
@@ -313,7 +314,7 @@ class Game:
         self.soybeans.add(soybean)
         self.all_sprites.add(soybean)
 
-    def run(self):
+    async def run(self):
         self.main_menu()  # Display the main menu before starting the game
         self.play_music()  # Start playing the MIDI music
 
@@ -322,6 +323,8 @@ class Game:
             self.update()
             self.draw()
             self.clock.tick(60)  # Maintain 60 FPS
+
+        await asyncio.sleep(0)
 
         pygame.quit()
         sys.exit()
@@ -488,4 +491,4 @@ class Game:
 
 if __name__ == "__main__":
     game = Game()
-    game.run()
+    asyncio.run( game.run() )
