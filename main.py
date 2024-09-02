@@ -260,6 +260,10 @@ class Game:
         self.player.hp = 7  # Reset HP to the initial value
         self.player.rect.center = (self.screen_width // 2, self.screen_height // 2)
 
+        # Reset player image to the first image
+        self.player.image = pygame.transform.scale(self.player_images[0], (100, 100))
+        self.player.rect = self.player.image.get_rect(center=self.player.rect.center)
+
         # Reset level and ball count
         self.current_level = 0
         self.balls_destroyed = 0
@@ -286,7 +290,7 @@ class Game:
 
     def play_music(self):
         pygame.mixer.music.load("assets/quarta_passada.mid")  # Replace with your MIDI file's path
-        pygame.mixer.music.play(-1)  # Loop the m
+        pygame.mixer.music.play(-1)  # Loop the music
 
     def spawn_ball(self):
         edge_positions = [
@@ -340,6 +344,7 @@ class Game:
         self.screen.blit(lose_text, (self.screen_width // 2 - lose_text.get_width() // 2, self.screen_height // 2 - lose_text.get_height() // 2))
         pygame.display.flip()
         pygame.time.wait(5000)  # Wait for 5 seconds
+        self.reset_game()  # Reset the game state
         self.main_menu()  # Go back to the main menu
 
     def update(self):
@@ -424,7 +429,7 @@ class Game:
         self.screen.blit(win_text, (self.screen_width // 2 - win_text.get_width() // 2, self.screen_height // 2 - win_text.get_height() // 2))
         pygame.display.flip()
         pygame.time.wait(5000)  # Wait for 5 seconds
-        self.reset_game()  # Reset the game state before going back to the main menu
+        self.reset_game()  # Reset the game state
         self.main_menu()  # Go back to the main menu
 
     def get_angle_to_mouse(self):
