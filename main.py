@@ -323,8 +323,7 @@ class Game:
             self.update()
             self.draw()
             self.clock.tick(60)  # Maintain 60 FPS
-
-        await asyncio.sleep(0)
+            await asyncio.sleep(0)
 
         pygame.quit()
         sys.exit()
